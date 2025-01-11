@@ -3,6 +3,7 @@
 ### VPC
 
 ### Advanced services
+---
 #### VPC Gateway Endpoint
 Purpose: Allows private connectivity to S3 and DynamoDB from within your VPC.
 Type: Operates at the gateway level.
@@ -25,6 +26,7 @@ Configuration:
 Use Case:
 - Access S3 or DynamoDB from within your VPC securely and efficiently.
 
+---
 #### VPC Interface Endpoint
 Purpose: Enables private connectivity to most AWS services and some third-party services via AWS PrivateLink.
 Type: Operates at the interface level.
@@ -49,6 +51,7 @@ Use Case:
 - Access AWS services that don’t support gateway endpoints.
 - Use for more granular control with security groups and private IPs.
 
+---
 #### Transit Gateway
 Purpose: Simplifies connecting multiple VPCs and on-premises networks using a centralized hub-and-spoke model.
 Type: AWS-managed network infrastructure.
@@ -73,6 +76,7 @@ Use Cases:
 - Large-scale, multi-VPC environments.
 - Connecting on-premises networks to multiple VPCs.
 
+---
 #### AWS VPC Peering
 Purpose: Provides a direct, one-to-one private connection between two VPCs.
 Type: Peer-to-peer connection.
