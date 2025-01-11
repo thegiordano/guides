@@ -12,6 +12,7 @@ Benefits:
 - speed does not degrade with size
 - efficient for concurrent reads
 
+---
 ### Core structure
 
 **Structure**
@@ -40,6 +41,7 @@ These connect to the broker via *TCP* and use a custom protocol (the Kafka proto
 
 The producer/consumer clients are simply a *Java* library that implements the Kafka protocol and gives you a nice interface to interact with. Nowadays there’s an implementation in virtually every language out there.
 
+---
 ### Controllers
 
 A distributed system requires coordination.
@@ -59,6 +61,7 @@ All the cluster’s metadata is stored inside a simple (but special) Kafka topic
 
 All brokers replicate this topic - that’s how they get metadata.
 
+---
 ### Extentions
 
 To support Kafka's role as a core component of stream data processing and orchestration, it offers two key open-source tools: Kafka Connect and Kafka Streams.
@@ -109,6 +112,7 @@ Features:
 - Supports various programming languages and offers API abstractions like PyFlink and Table APIs for enhanced flexibility.
 - Savepoints and state migration allow for creating savepoints, facilitating updates and migrations without data loss, and ensuring business continuity.
 
+---
 ### Avro
 Apache Avro is a data serialization framework commonly used in big data applications.
 Serialization is the process of converting data structures or objects into a format that can be easily stored or transmitted (e.g., a binary or text format).
@@ -128,6 +132,7 @@ Avro in action:
     - An external service (e.g., Confluent Schema Registry) stores Avro schemas.
     - Producers and consumers communicate with the registry to fetch or validate schemas.
 
+---
 ### Sources
 - https://blog.2minutestreaming.com/p/summary-introduction-apache-kafka
 - https://www.redpanda.com/guides/event-stream-processing-kafka-streams-vs-flink
