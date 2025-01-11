@@ -1,6 +1,40 @@
 ## Networking Overview
 
 ### VPC
+---
+#### Basics
+A VPC spans all Availability Zones (AZ) in a Region.
+Private and Public Subnets can be created per AZ inside a single VPC.
+
+---
+#### IGW
+- An internet gateway (IGW) enables resources in your public subnets to connect to the internet if the resource has a public IPv4 address or an IPv6 address.
+- An IGW provides a target in your VPC route tables for internet-routable traffic. For communication using IPv4, the IGW also performs network address translation (NAT)
+
+---
+#### Security Groups
+Security Group (Stateful):
+- Operates at the instance level.
+- Automatically allows response traffic (stateful behavior).
+- Rules can only allow traffic, not deny it.
+- Default behavior: Deny all inbound and allow all outbound.
+
+Example:
+- Inbound rule: Allow HTTP (port 80) from 0.0.0.0/0.
+- When a user accesses the server on port 80, the response traffic is automatically allowed.
+
+---
+#### Network Access Control Lists
+NACL (Stateless):
+- Operates at the subnet level.
+- Does not allow response traffic automatically; both inbound and outbound rules must be defined.
+- Rules can allow or deny traffic.
+- Default behavior: Allow all inbound and outbound.
+- Rules are evaluated sequentially, starting from the lowest number to the highest.
+
+Example:
+- Inbound rule: Allow HTTP (port 80) from 0.0.0.0/0.
+- Outbound rule: Must explicitly allow HTTP (port 80) to 0.0.0.0/0, or response traffic will be blocked.
 
 ### Advanced services
 ---
