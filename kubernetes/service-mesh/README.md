@@ -99,7 +99,7 @@ Install the Helm chart; this will deploy a Service of type LoadBalancer (NLB on 
 helm install istio-ingress istio/gateway -n istio-ingress --create-namespace
 ```
 
-The VirtualService now has to include the external DNS name; use the DNS name of the load balancer or provide your purchased domain name. You can also use a fake domain name, and simply edit your ```hosts``` file or append the fake domain name in the ehader of ```curl```.
+The VirtualService now has to include the external DNS name; use the DNS name of the load balancer or provide your purchased domain name. You can also use a fake domain name, and simply edit your ```hosts``` file or append the fake domain name in the header of ```curl```.
 ```yaml
 ---
 apiVersion: networking.istio.io/v1beta1
