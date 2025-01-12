@@ -135,3 +135,68 @@ Configuration:
 
 Use Cases:
 - Direct connection between two specific VPCs.
+
+---
+#### Site-to-site VPN
+To establish a Site-to-site VPN connection between your pfSense firewall (acting as the customer gateway) and a VPC, do:
+
+<u>Configure AWS Components</u>:
+
+Create a Customer Gateway:
+- In the AWS Management Console, navigate to the VPC Dashboard.
+- Under "Virtual Private Network (VPN)," select "Customer Gateways" and click "Create Customer Gateway."
+- Provide a name, select "Static" for routing, and enter the public IP address of your pfSense firewall.
+- Click "Create Customer Gateway."
+
+Create a Virtual Private Gateway:
+- In the VPC Dashboard, under "Virtual Private Network (VPN)," select "Virtual Private Gateways" and click "Create Virtual Private Gateway."
+- Provide a name and use the Amazon default ASN.
+- Click "Create Virtual Private Gateway."
+- After creation, select the Virtual Private Gateway, choose "Actions," and select "Attach to VPC."
+- Select the desired VPC and confirm the attachment.
+
+Create a VPN Connection:
+- In the VPC Dashboard, under "Virtual Private Network (VPN)," select "Site-to-Site VPN Connections" and click "Create VPN Connection."
+- Provide a name, select the Virtual Private Gateway and Customer Gateway created earlier.
+- For routing options, choose "Static" and enter the CIDR block(s) of your on-premises network behind the pfSense firewall.
+- Click "Create VPN Connection."
+- After creation, select the VPN Connection and download the configuration file, choosing "pfSense" as the vendor and the appropriate software version.
+
+<u>Configure pfSense</u>:
+
+Access pfSense Web Interface:
+- Open a web browser and navigate to the pfSense management IP address.
+- Log in with administrative credentials.
+
+Configure IPsec Tunnels:
+- Navigate to "VPN" > "IPsec" and click "Add P1" to create Phase 1 of the tunnel.
+- Refer to the downloaded AWS configuration file for specific parameters:
+    - Remote Gateway: AWS VPN Endpoint IP address.
+    - Authentication Method: Pre-Shared Key (as provided in the AWS config file).
+    - Encryption and Hashing Algorithms: Match the AWS configuration.
+- Save the Phase 1 configuration.
+- Under the newly created Phase 1 entry, click "Show Phase 2 Entries" and then "Add P2" to create Phase 2 of the tunnel.
+    - Local Network: Your on-premises subnet(s).
+    - Remote Network: AWS VPC CIDR block.
+    - Encryption and Hashing Algorithms: Match the AWS configuration.
+
+- Save the Phase 2 configuration and apply changes.
+
+Enable IPsec Service:
+- Navigate to "Status" > "IPsec" and ensure the service is running.
+- Initiate the connection by clicking "Connect" for the respective tunnel.
+
+Configure Firewall Rules:
+- Navigate to "Firewall" > "Rules" and select the "IPsec" tab.
+- Create rules to allow traffic between your on-premises network and the AWS VPC as needed.
+
+<u>Configure AWS Route Tables</u>:
+
+In order for routes that represent your Site-to-Site VPN connection to automatically appear as propagated routes in your route table, do:
+
+- Select the route table associated with your VPC.
+- Edit Route Propagation:
+    - With the route table selected, choose "Actions," then "Edit route propagation."
+    - In the "Edit route propagation" dialog, select the virtual private gateway (VGW) associated with your VPN connection.
+    - Check the box to enable propagation.
+    - Click "Save."
