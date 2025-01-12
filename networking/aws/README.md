@@ -140,7 +140,7 @@ Use Cases:
 #### Site-to-site VPN
 To establish a Site-to-site VPN connection between your pfSense firewall (acting as the customer gateway) and a VPC, do:
 
-<u>Configure AWS Components</u>:
+**Configure AWS Components**:
 
 Create a Customer Gateway:
 - In the AWS Management Console, navigate to the VPC Dashboard.
@@ -162,7 +162,7 @@ Create a VPN Connection:
 - Click "Create VPN Connection."
 - After creation, select the VPN Connection and download the configuration file, choosing "pfSense" as the vendor and the appropriate software version.
 
-<u>Configure pfSense</u>:
+**Configure pfSense**:
 
 Access pfSense Web Interface:
 - Open a web browser and navigate to the pfSense management IP address.
@@ -190,7 +190,7 @@ Configure Firewall Rules:
 - Navigate to "Firewall" > "Rules" and select the "IPsec" tab.
 - Create rules to allow traffic between your on-premises network and the AWS VPC as needed.
 
-<u>Configure AWS Route Tables</u>:
+**Configure AWS Route Tables**:
 
 In order for routes that represent your Site-to-Site VPN connection to automatically appear as propagated routes in your route table, do:
 
